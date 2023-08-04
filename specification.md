@@ -295,30 +295,28 @@ int main(void)
 Make necessary changes to make it run. 
 
 
-Some resources which might be helpful:
-1. https://pages.cs.wisc.edu/~gerald/cs537/Summer17/projects/p4b.html
-2. https://courses.cs.duke.edu/fall22/compsci310/thread.html
-3. https://moss.cs.iit.edu/cs450/mp4-xv6.html
-4. https://www.youtube.com/watch?v=1c3Bd8NlkIQ&ab_channel=TheSparkle
-5. https://users.cs.utah.edu/~aburtsev/238P/2018winter/hw/hw4-threads.html
-6. https://pdos.csail.mit.edu/6.S081/2020/labs/thread.html
+
 
 <h3>Mark Distribution</h3>
-| Task      | Mark |
-| ----------- | ----------- |
-| Proper implementation of Task 1      | 45       |
-| Spinlock implementation   | 10        |
-| Mutex implementation	    | 15	|
-| Conditional Variable implementation | 20 |
-| Semaphore implementation | 10 |
+
+
+|  | Task      | Mark |
+| ---- | ----------- | ----------- |
+| 1 | Proper implementation of Task 1      | 45       |
+| 2 | Spinlock implementation   | 10        |
+| 3  | Mutex implementation	    | 15	|
+| 4 | Conditional Variable implementation | 20 |
+| 5 | Semaphore implementation | 10 |
 
 
 
 
 <h3>Submission guideline</h3>
+
 Start with a fresh copy of xv6-riscv from the original repository. Make necessary changes for this offline. In this
 offline, you will submit just the changes done (i.e.: a patch file), not the entire repository.
 Don’t commit. Modify and create files that you need to. Then create a patch using the following command:
+
 ```bash
 git add --all
 git diff HEAD > {studentID}.patch
@@ -329,6 +327,15 @@ git apply {studentID}.patch
 Make sure to test your patch file after submission in the same way we will run it during the evaluation.
 
 <h3>Special Instruction</h3>
+
 1. This offline is a very complex one. So please start early. 
-2. Discussion with peers is encouraged when you are stuck. The direct copy will be strictly punished. 
-<!-- [malloc vs sbrk](https://stackoverflow.com/questions/19676688/how-malloc-and-sbrk-works-in-unix) -->
+2. Discussion with peers is encouraged when you are stuck. A direct copy will be strictly punished.
+3. You are encouraged to explore codes from github.  But whatever you do, please make sure to understand it fully.  
+
+Some resources which might be helpful:
+1. https://pages.cs.wisc.edu/~gerald/cs537/Summer17/projects/p4b.html
+2. https://courses.cs.duke.edu/fall22/compsci310/thread.html
+3. https://moss.cs.iit.edu/cs450/mp4-xv6.html
+4. https://www.youtube.com/watch?v=1c3Bd8NlkIQ&ab_channel=TheSparkle
+5. https://users.cs.utah.edu/~aburtsev/238P/2018winter/hw/hw4-threads.html
+6. https://pdos.csail.mit.edu/6.S081/2020/labs/thread.html
