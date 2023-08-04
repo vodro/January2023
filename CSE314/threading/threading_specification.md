@@ -167,7 +167,7 @@ Mutexes can be implemented very similarly to spinlocks (the implementation you a
 
 
 
-### Conditional Variables
+<h2> Conditional Variables </h2>
 While spinlock and mutex synchronization works well, sometimes we need a synchronization pattern similar to the **producer-consumer** queue that was discussed in your theory class, i.e., instead of spinning on a spinlock or yielding the CPU in a mutex, we would like the thread to sleep until a certain condition is met.
 
 POSIX provides support for such a scheme with [**conditional variables**](https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-5:-Condition-Variables). A condition variable is used to allow a thread to sleep until a condition is true. Note that conditional variables are always used along with the mutex.
