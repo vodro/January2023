@@ -42,7 +42,7 @@ int thread_exit(void)
 
 You also need to think about the semantics of a couple of existing system calls. For example, `int wait()` should wait for a child process that does not share the address space with this process. It should also free the address space if this is the last reference to it. Finally, `exit() `should work as before but for both processes and threads; little change is required here. 
 
-To test your implementation you may use the following program:
+To test your implementation you may use the following program `threads.c`:
 ```c
 #include "kernel/types.h"
 #include "kernel/stat.h"
@@ -308,7 +308,7 @@ Make necessary changes to make it run.
 | 4 | Conditional Variable implementation | 20 |
 | 5 | Semaphore implementation | 10 |
 
-
+Please make sure your `threads.c` and `producer_consumer.c` is running. This will make the evaluation process faster. 
 
 
 <h3>Submission guideline</h3>
