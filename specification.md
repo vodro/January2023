@@ -1,5 +1,5 @@
-#<div style='text-align: center'>January 2023 CSE 314  </div>
-###<div style='text-align: center'>Offline Assignment 5: xv6 - Threading & Synchronization</div>
+#January 2023 CSE 314 
+###Offline Assignment 5: xv6 - Threading & Synchronization
 
 #### Introduction
 In our previous offline, we have used **POSIX** threads to solve _synchronization problems_. As a smart CSE student, we won't be limited to a user only, but also design thread and synchronization primitives of our own. In this offline, we will add support of threads in **xv6**. We will implement a user level thread library and some system calls related to threads that very familiar to us. Then, we will implement **POSIX-like** synchronization primitives in **xv6**. Finally, we will use these primitives to solve some synchronization problems.
