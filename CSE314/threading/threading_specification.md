@@ -326,7 +326,7 @@ In the lab, during evaluation, we will start with a fresh copy of xv6 and apply 
 git apply {studentID}.patch
 Make sure to test your patch file after submission in the same way we will run it during the evaluation.
 
-<h3>Special Instruction</h3>
+<h3>Special Instructions</h3>
 
 1. This offline is a very complex one. So please start early. 
 2. Discussion with peers is encouraged when you are stuck. A direct copy will be strictly punished.
