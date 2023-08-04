@@ -14,7 +14,7 @@ In our previous offline, we used **POSIX** threads to solve _synchronization pro
 * Though the threads share a common address space, each thread requires its own stack. This is because each thread might execute entirely different code in the program (call different functions with different arguments; all this information has to be preserved for each thread individually) 
 
 
-###Task 1: Implementing thread support in xv6
+<h2>Task 1: Implementing thread support in xv6</h2>
 You need to write three system calls 
 * `thread_create()`
 * `thread_join()`
@@ -122,7 +122,7 @@ The `int thread_join(void)` system call is very similar to the already existing 
 
 Finally, the `thread_exit()` system call is very similar to exit(). You should however be careful and do not deallocate the page table of the entire process when one of the threads exits.
 
-#### Task 2: Implementing synchronization primitives in xv6
+<h2>Task 2: Implementing synchronization primitives in xv6</h2>
 If you implemented your threads correctly and ran them a couple of times you might notice that the total balance (the final value of the total_balance does not match the expected `6000`, i.e., the sum of individual balances of each thread. This is because it might happen that both threads read an old value of the total_balance at the same time, and then update it at almost the same time as well. As a result, the deposit (the increment of the balance) from one of the threads is lost.
 
 ##### Spinlock
@@ -179,7 +179,7 @@ You have to implement conditional variables similar to the ones provided by POSI
 Conditional variables can be used to implement semaphores. 
 Follow [this](https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-5:-Condition-Variables) to implement semaphores using conditional variables.
 
-A sample program to test your semaphore implementation is given below:
+A sample program `producer_consumer.c` to test your semaphore implementation is given below:
 ```c
 #include "kernel/types.h"
 #include "kernel/stat.h"
@@ -292,7 +292,43 @@ int main(void)
 }
 
 ```
-Make necessary changes to make it running. 
+Make necessary changes to make it run. 
 
 
+Some resources which might be helpful:
+1. https://pages.cs.wisc.edu/~gerald/cs537/Summer17/projects/p4b.html
+2. https://courses.cs.duke.edu/fall22/compsci310/thread.html
+3. https://moss.cs.iit.edu/cs450/mp4-xv6.html
+4. https://www.youtube.com/watch?v=1c3Bd8NlkIQ&ab_channel=TheSparkle
+5. https://users.cs.utah.edu/~aburtsev/238P/2018winter/hw/hw4-threads.html
+6. https://pdos.csail.mit.edu/6.S081/2020/labs/thread.html
+
+<h3>Mark Distribution</h3>
+| Task      | Mark |
+| ----------- | ----------- |
+| Proper implementation of Task 1      | 45       |
+| Spinlock implementation   | 10        |
+| Mutex implementation	    | 15	|
+| Conditional Variable implementation | 20 |
+| Semaphore implementation | 10 |
+
+
+
+
+<h3>Submission guideline</h3>
+Start with a fresh copy of xv6-riscv from the original repository. Make necessary changes for this offline. In this
+offline, you will submit just the changes done (i.e.: a patch file), not the entire repository.
+Don’t commit. Modify and create files that you need to. Then create a patch using the following command:
+```bash
+git add --all
+git diff HEAD > {studentID}.patch
+```
+Where studentID = your own seven-digit student ID (e.g., 1905001). Just submit the patch file, do not zip it.
+In the lab, during evaluation, we will start with a fresh copy of xv6 and apply your patch using the command:
+git apply {studentID}.patch
+Make sure to test your patch file after submission in the same way we will run it during the evaluation.
+
+<h3>Special Instruction</h3>
+1. This offline is a very complex one. So please start early. 
+2. Discussion with peers is encouraged when you are stuck. The direct copy will be strictly punished. 
 <!-- [malloc vs sbrk](https://stackoverflow.com/questions/19676688/how-malloc-and-sbrk-works-in-unix) -->
