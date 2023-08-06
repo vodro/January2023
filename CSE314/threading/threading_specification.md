@@ -123,12 +123,18 @@ Make necessary changes if required. Here we create two threads that execute the 
 
 
 #### Hints
-The `thread_create()` call should behave very much like a fork, except that instead of copying the  address space to a new page table, it initializes the new process so that the new process and cloned process use the same page table. Thus, memory will be shared, and the two "processes" are really threads. You have to think about returning to  function `fcn` after thread creation. Please study `p->trapframe->epc` for this task. You also have to change the user stack with the supplied  stack. Look more about `p->trapframe->epc`. Find your own way out to copy the `arg` to stack to make it available to  function `fcn()` . `kernel\exec.c` can be a good example  follow. 
+The `thread_create()` call should behave very much like a fork, except that instead of copying the  address space to a new page table, it initialises the new process so that the new process and cloned process use the same page table. Thus, memory will be shared, and the two "processes" are really threads. You have to think about returning to  function `fcn` after thread creation. Please study `p->trapframe->epc` for this task. You also have to change the user stack with the supplied  stack. Look more about `p->trapframe->epc`. Find your own way out to copy the `arg` to stack to make it available to  function `fcn()` . `kernel\exec.c` can be a good example to follow. 
+
+
+![Figure 2.3 from xv6 book](https://i.ibb.co/3kF9xzs/Screenshot-from-2023-08-06-21-03-44.png)
+
+
+Please understand the trapframe page in Figure 2.3. As the thread uses the same page table, how do we map its trapframe page? Do we need to consider any more pages? Now, it may be a good time to visit Chapter 2 from the [xv6 book](https://pdos.csail.mit.edu/6.828/2022/xv6/book-riscv-rev3.pdf). 
 
 The `int thread_join(void)` system call is very similar to the already existing int wait(void) system call in xv6. Join waits for a thread child to finish, and wait waits for a process child to finish. 
 Attaching a new attribute `int is_thread` to the process structure will be very helpful. 
 
-Finally, the `thread_exit()` system call is very similar to exit(). You should however be careful and do not deallocate the page table of the entire process when one of the threads exits. Please understand how exit works and the necessity of reparenting. 
+Finally, the `thread_exit()` system call is very similar to exit(). You should however be careful and do not deallocate the page table of the entire process when one of the threads exits. Please understand how `exit()` works and the necessity of reparenting.
 
 <h2>Task 2: Implementing synchronization primitives in xv6</h2>
 If you implemented your threads correctly and ran them a couple of times you might notice that the total balance (the final value of the total_balance does not match the expected `6000`, i.e., the sum of individual balances of each thread. This is because it might happen that both threads read an old value of the total_balance at the same time, and then update it at almost the same time as well. As a result, the deposit (the increment of the balance) from one of the threads is lost.
