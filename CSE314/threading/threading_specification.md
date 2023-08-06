@@ -123,13 +123,17 @@ Make necessary changes if required. Here we create two threads that execute the 
 
 
 #### Hints
-The `thread_create()` call should behave very much like a fork, except that instead of copying the  address space to a new page table, it initialises the new process so that the new process and cloned process use the same page table. Thus, memory will be shared, and the two "processes" are really threads. You have to think about returning to  function `fcn` after thread creation. Please study `p->trapframe->epc` for this task. You also have to change the user stack with the supplied  stack. Look more about `p->trapframe->epc`. Find your own way out to copy the `arg` to stack to make it available to  function `fcn()` . `kernel\exec.c` can be a good example to follow. 
+The `thread_create()` call should behave very much like a fork, except that instead of copying the address space to a new page table, it initialises the new process so that the new process and cloned process use the same page table. Thus, memory will be shared, and the two "processes" are really threads. You have to think about returning to function `fcn` after thread creation. Please study `p->trapframe->epc` for this task. You also have to replace the user stack with the supplied stack. Look more closely at `p->trapframe->sp`. Find your own way out to copy the `arg` to stack to make it available to  function `fcn()` . `kernel\exec.c` can be a good example to follow. 
 
 
 ![Figure 2.3 from xv6 book](https://i.ibb.co/3kF9xzs/Screenshot-from-2023-08-06-21-03-44.png)
 
 
-Please understand the trapframe page in Figure 2.3. As the thread uses the same page table, how do we map its trapframe page? Do we need to consider any more pages? Now, it may be a good time to visit Chapter 2 from the [xv6 book](https://pdos.csail.mit.edu/6.828/2022/xv6/book-riscv-rev3.pdf). 
+Please understand the trapframe page in Figure 2.3. As the thread uses the same page table, how do we map its trapframe page? Do we need to consider any more pages? 
+And the very first thing we did, making the page tables exactly equal, was it a wise decision? 
+Now, it may be a good time to visit Chapter 2 from the [xv6 book](https://pdos.csail.mit.edu/6.828/2022/xv6/book-riscv-rev3.pdf). 
+
+Understand what `uvmcopy()` is doing in `fork()`. Plan for a similar but slightly different approach. 
 
 The `int thread_join(void)` system call is very similar to the already existing int wait(void) system call in xv6. Join waits for a thread child to finish, and wait waits for a process child to finish. 
 Attaching a new attribute `int is_thread` to the process structure will be very helpful. 
