@@ -15,7 +15,7 @@ In our previous offline, we used **POSIX** threads to solve _synchronization pro
 #### Background
 * Revisit the difference between _process_ and _thread_. The main difference is that threads share the same address space, while processes have their own address space. 
 
-* Thoroughly understand what threads are and how you used them in your assignment on **IPC**.
+* Thoroughly understand what threads are and how you used them in your assignment on **IPC**. [pthreads](https://hpc-tutorials.llnl.gov/posix/)
 * Key takeaway idea for threads: threads are very much _like processes_ (they can run in parallel on different physical CPUs), but they share the same address space (the address space of the process that created them). 
 
 * Though the threads share a common address space, each thread requires its own stack. This is because each thread might execute entirely different code in the program (call different functions with different arguments; all this information has to be preserved for each thread individually) 
@@ -38,16 +38,17 @@ The new thread creation will be similar to the new process creation. Actually, w
 
 The other new system call is: 
 ```c 
-int thread_join(void)
+int thread_join(int thread_id)
 ``` 
-This call waits for a child thread that shares the address space with the calling process. It returns the PID of waited-for child or -1 if none.
+This call waits for a child thread with the id `thread_id` that shares the address space with the calling process. It returns the PID of the waited-for child or -1 if none.
 
 The last system call is: 
 ```c
-int thread_exit(void)
+void thread_exit(void)
 ```
-
+<!---
 You also need to think about the semantics of a couple of existing system calls. For example, `int wait()` should wait for a child process that does not share the address space with this process. It should also free the address space if this is the last reference to it. Finally, `exit() `should work as before but for both processes and threads; little change is required here. 
+--->
 
 To test your implementation you may use the following program `threads.c`:
 ```c
@@ -84,6 +85,7 @@ void do_work(void *arg){
          // thread_mutex_lock(&mlock);
          old = total_balance;
          delay(100000);
+	 // printf("old: %d total_balance: %d\n", old, total_balance)
          total_balance = old + 1;
          //thread_spin_unlock(&lock);
          // thread_mutex_lock(&mlock);
@@ -104,14 +106,14 @@ int main(int argc, char *argv[]) {
   void *s1, *s2;
   int thread1, thread2, r1, r2;
 
-  s1 = malloc(4096);
+  s1 = malloc(4096); // 4096 is the PGSIZE defined in kernel/riscv.h
   s2 = malloc(4096);
 
   thread1 = thread_create(do_work, (void*)&b1, s1);
   thread2 = thread_create(do_work, (void*)&b2, s2); 
 
-  r1 = thread_join();
-  r2 = thread_join();
+  r1 = thread_join(thread1);
+  r2 = thread_join(thread2);
   
   printf("Threads finished: (%d):%d, (%d):%d, shared balance:%d\n", 
       thread1, r1, thread2, r2, total_balance);
@@ -119,29 +121,43 @@ int main(int argc, char *argv[]) {
   exit();
 }
 ```
-Make necessary changes if required. Here we create two threads that execute the same `do_work()` function concurrently. The do_work() function in both threads updates the shared variable total_balance.
+Make necessary changes if required. Here we create two threads that execute the same `do_work()` function concurrently. The do_work() function in both threads deposits(updates)  the shared variable total_balance.
+
+Structure proc may need some more updates, 
+```c
+struct proc {
+	// previous ones
+  struct spinlock memlock;	// find places to set and release the locks 
+  int is_thread;               // if it is thread
+  int mem_id;                   // All threads will have the same physical pages with the mothrer, hence the same memory ID
+};
+```
 
 
 #### Hints
 The `thread_create()` call should behave very much like a fork, except that instead of copying the address space to a new page table, it initialises the new process so that the new process and cloned process use the same page table. Thus, memory will be shared, and the two "processes" are really threads. You have to think about returning to function `fcn` after thread creation. Please study `p->trapframe->epc` for this task. You also have to replace the user stack with the supplied stack. Look more closely at `p->trapframe->sp`. Find your own way out to copy the `arg` to stack to make it available to  function `fcn()` . `kernel\exec.c` can be a good example to follow. 
 
-
-![Figure 2.3 from xv6 book](https://i.ibb.co/3kF9xzs/Screenshot-from-2023-08-06-21-03-44.png)
-
+| previous memory layout | current memory layout | 
+| -----------------------| ----------------------|
+|![Figure 2.3 from xv6 book](https://i.ibb.co/3kF9xzs/Screenshot-from-2023-08-06-21-03-44.png) |![Current layout](https://i.ibb.co/c6sF5Pk/threads-jpg.png) | 
 
 Please understand the trapframe page in Figure 2.3. As the thread uses the same page table, how do we map its trapframe page? Do we need to consider any more pages? 
 And the very first thing we did, making the page tables exactly equal, was it a wise decision? 
 Now, it may be a good time to visit Chapter 2 from the [xv6 book](https://pdos.csail.mit.edu/6.828/2022/xv6/book-riscv-rev3.pdf). 
 
-Understand what `uvmcopy()` is doing in `fork()`. Plan for a similar but slightly different approach. 
+Understand what `uvmcopy()` is doing in `fork()`. Plan for a similar but slightly different `uvmmirror()` approach that doesn't use `kalloc()` i.e. doesn't allocate new physical pages. `mappages()` should be a good friend of you. 
+One last thing that you have to brainstorm, is how to keep the page tables synchronized when a new page is allocated or deallocated by any of the threads. 
 
-The `int thread_join(void)` system call is very similar to the already existing int wait(void) system call in xv6. Join waits for a thread child to finish, and wait waits for a process child to finish. 
-Attaching a new attribute `int is_thread` to the process structure will be very helpful. 
+The `int thread_join(int thread_id)` system call is very similar to the already existing `int wait(uint64 addr)` system call in xv6. Join waits for a thread child to finish, and wait waits for a process child to finish.
 
 Finally, the `thread_exit()` system call is very similar to exit(). You should however be careful and do not deallocate the page table of the entire process when one of the threads exits. Please understand how `exit()` works and the necessity of reparenting.
 
+
+
+
+
 <h2>Task 2: Implementing synchronization primitives in xv6</h2>
-If you implemented your threads correctly and ran them a couple of times you might notice that the total balance (the final value of the total_balance does not match the expected `6000`, i.e., the sum of individual balances of each thread. This is because it might happen that both threads read an old value of the total_balance at the same time, and then update it at almost the same time as well. As a result, the deposit (the increment of the balance) from one of the threads is lost.
+If you implemented your threads correctly and ran them a couple of times you might notice that the total balance (the final value of the total_balance does not match the expected `6000` , i.e., the sum of individual balances of each threas.  This is because it might happen that both threads read an old value of the total_balance at the same time, and then update it at almost the same time as well. Try uncommenting the **printf** part. As a result, the deposit (the increment of the balance) from one of the threads is lost.
 
 ##### Spinlock
 To fix this synchronization error you have to implement a spinlock that will allow you to execute the update atomically, i.e., you will have to implement the `thread_spin_lock()` and `thread_spin_unlock()` functions and put them around your atomic section (you can uncomment existing lines above).
@@ -156,7 +172,7 @@ To implement spinlocks you can copy the implementation from the xv6 kernel. Just
 
 
 #### Mutexes 
-Suppose, you are running on a system with a **single** physical CPU, or the system is under high load and a context switch occurs in a **critical section**  then all threads of the process start to spin endlessly, waiting for the interrupted (lock-holding) thread to be scheduled and run again the spinlocks become inefficient. If you look closely, the main culprit is that the threads are spinning in a loop, wasting CPU cycles. Mutexes to our rescue!
+Suppose, you are running on a system with a **single** physical CPU, or the system is under high load and a context switch occurs in a **critical section**  then all threads of the process start to spin endlessly, waiting for the interrupted (lock-holding) thread to be scheduled and run again the spinlocks become inefficient. If you look closely, the main culprit is that the threads are spinning in a loop, wasting CPU cycles. **Mutexes to our rescue!**
 
 A higher-level pseudo-code for a mutex is as follows:
 ```c
@@ -181,7 +197,7 @@ Specifically, you should define a simple mutex data structure (`struct thread_mu
 2. a function to acquire a mutex (`void thread_mutex_lock(struct thread_mutex *m)`)
 3. a function to release it `void thread_mutex_unlock(struct thread_mutex *m)`.
 
-Mutexes can be implemented very similarly to spinlocks (the implementation you already have). Since xv6 doesn't have an explicit `yield(0)` system call, you can use `sleep(1)` instead from `thread_mutex_lock` function.
+Mutexes can be implemented very similarly to spinlocks (the implementation you already have). Since xv6 doesn't have an explicit `yield(0)` system call, you can use `sleep(1)` instead from the `thread_mutex_lock` function or may design a new system call which will call yield. 
 
 
 
@@ -347,8 +363,11 @@ Make sure to test your patch file after submission in the same way we will run i
 <h3>Special Instructions</h3>
 
 1. This offline is a very complex one. So please start early. 
-2. Discussion with peers is encouraged when you are stuck. A direct copy will be strictly punished.
-3. You are encouraged to explore codes from github.  But whatever you do, please make sure to understand it fully.  
+2. **Discussion with peers** is encouraged when you are stuck (Specially with the **panics** you will face).** A direct copy will be strictly punished.**
+3. You are **encouraged** to explore codes from github.  But whatever you do, please make sure to **understand it fully**.
+4. You must do the offline on top of `xv6-riscv`.
+5. Coding for more than 1:30 hours is not recommended. 
+
 
 Some resources which might be helpful:
 1. https://pages.cs.wisc.edu/~gerald/cs537/Summer17/projects/p4b.html
