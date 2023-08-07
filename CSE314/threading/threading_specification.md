@@ -86,7 +86,7 @@ void do_work(void *arg){
          old = total_balance;
          delay(100000);
          total_balance = old + 1;
-	 // if(old + 1 != total_balance)  printf("we missed an update. old: %d total_balance: %d\n", old, total_balance)
+	 // if(old + 1 != total_balance)  printf("we missed an update. old: %d total_balance: %d\n", old, total_balance);
          //thread_spin_unlock(&lock);
          // thread_mutex_lock(&mlock);
 
@@ -139,7 +139,7 @@ The `thread_create()` call should behave very much like a fork, except that inst
 
 | previous memory layout | current memory layout | 
 | -----------------------| ----------------------|
-|![Figure 2.3 from xv6 book](https://i.ibb.co/3kF9xzs/Screenshot-from-2023-08-06-21-03-44.png) |![Current layout](https://i.ibb.co/c6sF5Pk/threads-jpg.png) | 
+|![Figure 2.3 from xv6 book](https://i.ibb.co/3kF9xzs/Screenshot-from-2023-08-06-21-03-44.png) |![Current layout](https://i.ibb.co/KL6nStD/threads.png) | 
 
 Please understand the trapframe page in Figure 2.3. As the thread uses the same page table, how do we map its trapframe page? Do we need to consider any more pages? 
 And the very first thing we did, making the page tables exactly equal, was it a wise decision? 
