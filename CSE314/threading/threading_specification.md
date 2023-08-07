@@ -326,7 +326,7 @@ int main(void)
 }
 
 ```
-Make necessary changes to make it run. 
+Please make the necessary changes to make it run. 
 
 
 
@@ -355,7 +355,7 @@ Don’t commit. Modify and create files that you need to. Then create a patch us
 git add --all
 git diff HEAD > {studentID}.patch
 ```
-Where studentID = your own seven-digit student ID (e.g., 1905001). Just submit the patch file, do not zip it.
+Where studentID = your own seven-digit student ID (e.g., 1905XXX). Just submit the patch file, do not zip it.
 In the lab, during evaluation, we will start with a fresh copy of xv6 and apply your patch using the command:
 git apply {studentID}.patch
 Make sure to test your patch file after submission in the same way we will run it during the evaluation.
@@ -366,7 +366,7 @@ Make sure to test your patch file after submission in the same way we will run i
 2. **Discussion with peers** is encouraged when you are stuck (Specially with the **panics** you will face).** A direct copy will be strictly punished.**
 3. You are **encouraged** to explore codes from github.  But whatever you do, please make sure to **understand it fully**.
 4. You must do the offline on top of `xv6-riscv`.
-5. Coding for more than 1:30 hours per day (for this offline) is not recommended. 
+5. Coding for more than 1:30 hours daily (for this offline) is not recommended. 
 
 
 Some resources which might be helpful:
@@ -374,5 +374,6 @@ Some resources which might be helpful:
 2. https://courses.cs.duke.edu/fall22/compsci310/thread.html
 3. https://moss.cs.iit.edu/cs450/mp4-xv6.html
 4. https://www.youtube.com/watch?v=1c3Bd8NlkIQ&ab_channel=TheSparkle
-5. https://users.cs.utah.edu/~aburtsev/238P/2018winter/hw/hw4-threads.html
-6. https://pdos.csail.mit.edu/6.S081/2020/labs/thread.html
+5. https://www.youtube.com/watch?v=0zMYKwo482c&t=2464s&ab_channel=TheSparkle
+6. https://users.cs.utah.edu/~aburtsev/238P/2018winter/hw/hw4-threads.html
+7. https://pdos.csail.mit.edu/6.S081/2020/labs/thread.html
