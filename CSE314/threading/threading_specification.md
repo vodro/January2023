@@ -85,8 +85,8 @@ void do_work(void *arg){
          // thread_mutex_lock(&mlock);
          old = total_balance;
          delay(100000);
-	 // printf("old: %d total_balance: %d\n", old, total_balance)
          total_balance = old + 1;
+	 // if(old + 1 != total_balance)  printf("we missed an update. old: %d total_balance: %d\n", old, total_balance)
          //thread_spin_unlock(&lock);
          // thread_mutex_lock(&mlock);
 
@@ -157,7 +157,7 @@ Finally, the `thread_exit()` system call is very similar to exit(). You should h
 
 
 <h2>Task 2: Implementing synchronization primitives in xv6</h2>
-If you implemented your threads correctly and ran them a couple of times you might notice that the total balance (the final value of the total_balance does not match the expected `6000` , i.e., the sum of individual balances of each threas.  This is because it might happen that both threads read an old value of the total_balance at the same time, and then update it at almost the same time as well. Try uncommenting the **printf** part. As a result, the deposit (the increment of the balance) from one of the threads is lost.
+If you implemented your threads correctly and ran them a couple of times you might notice that the total balance (the final value of the total_balance does not match the expected `6000` , i.e., the sum of individual balances of each threas.  This is because it might happen that both threads read an old value of the total_balance at the same time, and then update it at almost the same time as well.  As a result, the deposit (the increment of the balance) from one of the threads is lost. Try uncommenting the **printf** part.
 
 ##### Spinlock
 To fix this synchronization error you have to implement a spinlock that will allow you to execute the update atomically, i.e., you will have to implement the `thread_spin_lock()` and `thread_spin_unlock()` functions and put them around your atomic section (you can uncomment existing lines above).
