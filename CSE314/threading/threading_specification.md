@@ -366,7 +366,7 @@ Make sure to test your patch file after submission in the same way we will run i
 2. **Discussion with peers** is encouraged when you are stuck (Specially with the **panics** you will face).** A direct copy will be strictly punished.**
 3. You are **encouraged** to explore codes from github.  But whatever you do, please make sure to **understand it fully**.
 4. You must do the offline on top of `xv6-riscv`.
-5. Coding for more than 1:30 hours is not recommended. 
+5. Coding for more than 1:30 hours per day (for this offline) is not recommended. 
 
 
 Some resources which might be helpful:
