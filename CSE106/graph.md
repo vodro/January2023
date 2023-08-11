@@ -1,7 +1,9 @@
-# January 2023 CSE106 
-# Offline Assignment on Graph
-### Deadline: Saturday, 19 August 2023, 11:45 PM
-N.B.: For all the tasks, you have to take input from a file named **`in.txt`** and give output to a file **`out.txt`**.
+<h1 align="center"> January 2023 CSE106 </h1>
+<h2 align="center"> Offline Assignment on Graph </h2>
+<h3 align="center"> Deadline: Saturday, 19 August 2023, 11:45 PM </h3>
+
+
+For **all the tasks** , you have to take input from a file named **`in.txt`** and give output to a file **`out.txt`**.
 ## Task 1
 Given a **uni-directional** graph ```G=(V,E)``` , you have to report, if given two vertices, the **second** vertex is reachable from **first** vertex. Solve the  problem using **BFS**. You may assume there is no `multi-edge` or `self-loop` in the graph. 
 
@@ -98,7 +100,7 @@ In this task, we will model a real-life problem  using graphs and solve it effic
 
 Do you remember chess? Especially the piece **knight**. A traditional knight has up to 8 moves from a square with coordinates `(x, y)` to squares `(x+1, y+2), (x+1, y-2), (x+2, y+1), (x+2, y-1), (x-1, y+2), (x-1, y-2), (x-2, y+1), (x-2, y-1)`, and can't move outside the chessboard. We build a new piece of our own and call it the **rider**. A rider can jump like a knight several times in **a single move**. A rider that can perform a maximum of K jumps during a single move is denoted as a K-rider. For example, a 2-rider can jump once or twice during a single move, and a 1-rider is a traditional knight.
 
-There are **some riders of different types** on a chessboard. Find the minimal total number of moves necessary to move all the riders to the same square(can be any square on the chessboard). **Only one piece can move during each move** .Multiple riders can share the same squares during the process. Print `-1` if it is impossible.
+There are **some riders of different types** on a chessboard. Find the minimal total number of moves necessary to move all the riders to the same square(can be any square on the chessboard). **Only one piece can move during each move** . Multiple riders can share the same squares during the process. Print `-1` if it is impossible.
 
 
 
@@ -151,7 +153,7 @@ Output the total minimal number of moves, if we can move all k-rider to the same
 
 For example, if your student id is 205xxx, create a directory named 2005xxx. Put only your
 source files (.c, .cpp, .java, .h, etc.) into 2005xxx. Compress 2005xxx into 2005xxx.zip and
-upload the 2005xxx.zip on moodle.
+upload the 205xxx.zip on moodle.
 
 ### For Queries
 If you have any questions related to the assignment please first check the queries thread in Moodle. You should post your confusion in the thread. If your query goes unanswered for 24 hours, please [mail me](vdrkowshic@gmail.com).
