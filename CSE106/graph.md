@@ -3,7 +3,7 @@
 ### Deadline: Saturday, 19 August 2023, 11:45 PM
 N.B.: For all the tasks, you have to take input from a file named **`in.txt`** and give output to a file **`out.txt`**.
 ## Task 1
-Given a **uni-directional** graph ```G=(V,E)``` , you have to report, if given two nodes, the **second** vertex is rechable from **first** vertex. Solve the  problem using **BFS** . You may assume there is no `multi-edge` or `self-loop` in the graph. 
+Given a **uni-directional** graph ```G=(V,E)``` , you have to report, if given two vertices, the **second** vertex is reachable from **first** vertex. Solve the  problem using **BFS**. You may assume there is no `multi-edge` or `self-loop` in the graph. 
 
 ### Input 
 The first line of input contains two integers `n and m`  (`1≤n≤10^5` ,`1≤m≤10^5`) — the number of vertices and the number of edges. 
@@ -13,7 +13,7 @@ The following m line each has two integers `u and  v ` —  there is a directed 
 The final line contains two integers  `s and  d ` —  the source and the destination. 
 
 ## Ouput 
-If there is a path from `s` to `d` print the length of the path. Finally in the second line prints the path itself. 
+If there is a path from `s` to `d`, print the path length. Finally the second line prints the path itself. 
 
 If no path exists print `-1` . 
 <div style="page-break-after: always;"></div>
@@ -21,7 +21,7 @@ If no path exists print `-1` .
 
 
 ## Sample I/O
-### test case 1
+### Test case 1
 ##### **in.txt**
 ```
 5 6
@@ -41,7 +41,7 @@ If no path exists print `-1` .
 ```
 
 
-### test case 2
+### Test case 2
 ##### **in.txt**
 ```
 5 6
@@ -71,7 +71,7 @@ You may result in a **different path** (path length **remains the same**) based 
 Solve the same problem using **DFS** . 
 
 ## Sample I/O
-### test case 1
+### Test case 1
 ##### **in.txt**
 ```
 5 6
@@ -116,7 +116,7 @@ Output the total minimal number of moves, if we can move all k-rider to the same
 <div style="page-break-after: always;"></div>
 
 ## Sample I/O
-### test case 1
+### Test case 1
 ##### **in.txt**
 ```
 3 3 3
@@ -130,7 +130,7 @@ Output the total minimal number of moves, if we can move all k-rider to the same
 4
 ```
 
-### test case 2
+### Test case 2
 ##### **in.txt**
 ```
 1 4 2
@@ -144,10 +144,10 @@ Output the total minimal number of moves, if we can move all k-rider to the same
 ```
 
 ### Submission guideline
-1. Create a directory with your 7 digit student id as its name
+1. Create a directory with your 7-digit student id as its name
 2. item Put the source files only into the directory created in step 1
 3. item Zip the directory (compress in .zip format; .rar, .7z or any other format is not acceptable)
-4. item Upload the .zip file on moodle.
+4. item Upload the .zip file on Moodle.
 
 For example, if your student id is 205xxx, create a directory named 2005xxx. Put only your
 source files (.c, .cpp, .java, .h, etc.) into 2005xxx. Compress 2005xxx into 2005xxx.zip and
@@ -160,13 +160,13 @@ If you have any questions related to the assignment please first check the queri
 
 ### Mark Distribution
 
-| Task              | Mark                 |
-|-------------------|----------------------|
-| Detecting impossible(tc03) | 15                 |
-| Properly traversing in the <br> chessboard (adjacent nodes)  | 25 | 
-| Implementing BFS properly |        30 | 
-| Properly works for knights (tc05)      | 15        | 
-| Properly works for k-riders (tc04)     | 15        |
+| Task No. | Task  Name            | Mark            |
+|----------|-----------------------|-----------------|
+| 1        | Proper implementation of BFS       | 25 |
+| 2        | Proper implementation of DFS       | 25 | 
+| 3        | Detecting impossible case (tc03)   | 10 |
+| 3        | Properly works for knights (tc05)  | 15 | 
+| 3        | Properly works for k-riders (tc04) | 25 |
 
 
 
