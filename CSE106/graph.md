@@ -5,7 +5,7 @@
 
 For **all the tasks** , you have to take input from a file named **`in.txt`** and give output to a file **`out.txt`**.
 ## Task 1
-Given a **uni-directional** graph ```G=(V,E)``` , you have to report, if given two vertices, the **second** vertex is reachable from **first** vertex. Solve the  problem using **BFS**. You may assume there is no `multi-edge` or `self-loop` in the graph. 
+Given a **uni-directional** graph ```G=(V,E)``` , you have to report, if given two vertices, the **second** vertex is reachable from the **first** vertex. Solve the  problem using **BFS**. You may assume there is no `multi-edge` or `self-loop` in the graph. 
 
 ### Input 
 The first line of input contains two integers `n and m`  (`1≤n≤10^5` ,`1≤m≤10^5`) — the number of vertices and the number of edges. 
