@@ -85,8 +85,8 @@ void do_work(void *arg){
          // thread_mutex_lock(&mlock);
          old = total_balance;
          delay(100000);
+	 // if(old != total_balance)  printf("we will miss an update. old: %d total_balance: %d\n", old, total_balance);
          total_balance = old + 1;
-	 // if(old + 1 != total_balance)  printf("we missed an update. old: %d total_balance: %d\n", old, total_balance);
          //thread_spin_unlock(&lock);
          // thread_mutex_lock(&mlock);
 
