@@ -92,7 +92,7 @@ Solve the same problem using **DFS** .
 ```
 ##### **out.txt**
 ```
-2
+3
 0 1 2 3
 ```
 Here you may have a **different path** with **different path length** . 
