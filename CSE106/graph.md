@@ -100,16 +100,16 @@ In this task, we will model a real-life problem  using graphs and solve it effic
 
 Do you remember chess? Especially the piece **knight**. A traditional knight has up to 8 moves from a square with coordinates `(x, y)` to squares `(x+1, y+2), (x+1, y-2), (x+2, y+1), (x+2, y-1), (x-1, y+2), (x-1, y-2), (x-2, y+1), (x-2, y-1)`, and can't move outside the chessboard. We build a new piece of our own and call it the **rider**. A rider can jump like a knight several times in **a single move**. A rider that can perform a maximum of K jumps during a single move is denoted as a K-rider. For example, a 2-rider can jump once or twice during a single move, and a 1-rider is a traditional knight.
 
-There are **some riders of different types** on a chessboard. Find the minimal total number of moves necessary to move all the riders to the same square(can be any square on the chessboard). **Only one piece can move during each move** . Multiple riders can share the same squares during the process. Print `-1` if it is impossible.
+There are **some riders of different types** on a chessboard. Find the **minimal total number of moves** necessary to move all the riders to the same square(can be any square on the chessboard). **Only one piece can move during each move** . Multiple riders can share the same squares during the process. Print `-1` if it is impossible.
 
 
 
 ## Input
 The first line of input contains three integers `n, m and q`  (`1≤n≤100` ,`1≤m≤100`, `1≤q≤n*m`) — the number of rows, the number of columns and the number of k-rider on the chessboard.
 
-The following q line each has three integers `x, y and k` — `(x,y)` the coordinates of the rider and `k` is the number of maximum jumps this k-rider can make. 
+The following q line each has three integers `x, y and k` — `(x,y)` the coordinates of the rider and `k` is the number of **maximum jumps** this k-rider can make in **a single move**. 
 
-Here `(x,y)` are `0`-indexed. Please refer to the sample i/o for a better understanding of the input. 
+Here `(x,y)` are `0`-indexed. Please refer to the sample IO for a better understanding of the input.
 
 
 ## Output
@@ -151,9 +151,9 @@ Output the total minimal number of moves, if we can move all k-rider to the same
 3. item Zip the directory (compress in .zip format; .rar, .7z or any other format is not acceptable)
 4. item Upload the .zip file on Moodle.
 
-For example, if your student id is 205xxx, create a directory named 2005xxx. Put only your
-source files (.c, .cpp, .java, .h, etc.) into 2005xxx. Compress 2005xxx into 2005xxx.zip and
-upload the 205xxx.zip on moodle.
+For example, if your student id is 2105xxx, create a directory named 2105xxx. Put only your
+source files (.c, .cpp, .java, .h, etc.) into 2105xxx. Compress 2105xxx into 2105xxx.zip and
+upload the 2105xxx.zip on moodle.
 
 ### For Queries
 If you have any questions related to the assignment please first check the queries thread in Moodle. You should post your confusion in the thread. If your query goes unanswered for 24 hours, please [mail me](vdrkowshic@gmail.com).
