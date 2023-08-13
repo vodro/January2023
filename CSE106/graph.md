@@ -31,7 +31,7 @@ If no path exists print `-1` .
 ### Test case 1
 ##### **in.txt**
 ```
-5 6
+6 6
 0 1
 0 2
 1 2
@@ -51,7 +51,7 @@ If no path exists print `-1` .
 ### Test case 2
 ##### **in.txt**
 ```
-5 6
+6 6
 0 1
 0 2
 1 2
@@ -81,7 +81,7 @@ Solve the same problem using **DFS** .
 ### Test case 1
 ##### **in.txt**
 ```
-5 6
+6 6
 0 1
 0 2
 1 2
