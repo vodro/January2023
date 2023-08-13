@@ -2,6 +2,11 @@
 <h2 align="center"> Offline Assignment on Graph </h2>
 <h3 align="center"> Deadline: Saturday, 19 August 2023, 11:45 PM </h3>
 
+## Changelog
+
+| Modification      | Time |
+| ------------------ | -------- |
+| The solution of Task 3  must have <br> a complexity of `O(n*m*q)` | 13 August |
 
 For **all the tasks** , you have to take input from a file named **`in.txt`** and give output to a file **`out.txt`**.
 ## Task 1
@@ -120,6 +125,8 @@ Here `(x,y)` are `0`-indexed. Please refer to the sample IO for a better underst
 ## Output
 Output the total minimal number of moves, if we can move all k-rider to the same square. Else print -1.  
 
+
+Please notice, **The solution   must have  a complexity of `O(n*m*q)`**
 <div style="page-break-after: always;"></div>
 
 ## Sample I/O
